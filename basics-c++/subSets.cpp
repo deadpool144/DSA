@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void subSetAll(vector<int>& arr, int i, vector<int>& current,vector<vector<int>>& subSets) {
+void subSetAll(vector<int>& arr, int i, vector<int>& current,vector<vector<int>>& subSets) {       // for all subsets      
     if (i == arr.size()) {
         subSets.push_back(current);
         return;
@@ -16,13 +16,29 @@ void subSetAll(vector<int>& arr, int i, vector<int>& current,vector<vector<int>>
     subSetAll(arr, i + 1, current, subSets);
     return;    
 }
+
+
+void subSetNoDublicate(vector<int>& arr, int i, vector<int>& current,vector<vector<int>>& subSets) {        // for dublicated
+    if (i == arr.size()) {
+        subSets.push_back(current);
+        return;
+    }
+    current.push_back(arr[i]);
+    subSetNoDublicate(arr, i + 1, current, subSets); 
+    current.pop_back();
+    int j = i + 1;
+    while(j < arr.size() && arr[j] == arr[i])
+    j++; 
+    subSetNoDublicate(arr, j, current, subSets);
+    return;    
+}
     
 
  int main() {
-    vector<int> arr = {1, 2, 3};
+    vector<int> arr = {1, 2, 2};
     vector<int> temp;
     vector<vector<int>> subSets;
-    subSetAll(arr, 0,temp, subSets);
+    subSetNoDublicate(arr, 0,temp, subSets);
     
     cout << "Subsets are: " << endl;
     for (vector<int>set:subSets) {
