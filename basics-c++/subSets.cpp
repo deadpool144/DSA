@@ -25,9 +25,9 @@ void subSetAll(vector<int>& arr, int i, vector<int>& current,vector<vector<int>>
     subSetAll(arr, 0,temp, subSets);
     
     cout << "Subsets are: " << endl;
-    for (const auto& subset : subSets) {
+    for (vector<int>set:subSets) {
         cout << "{ ";
-        for (int num : subset) {
+        for (int num :set) {
             cout << num << " ";
         }
         cout << "}" << endl;
