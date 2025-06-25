@@ -23,6 +23,16 @@ void dfs(stack<int>& s, vector<bool>& visited, vector<vector<int>>& graph,int so
     }
 }
 
+void recursiveDFS(vector<bool>& visited, vector<vector<int>>& graph, int source){       // recursive DFS
+    visited[source] = true;
+    cout << source << " ";
+    for(int neg: graph[source]){
+        if(!visited[neg]) {
+            recursiveDFS(visited, graph, neg);
+        }
+    }
+}
+
 
 int main() {
     stack<int> s;
