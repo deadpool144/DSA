@@ -33,9 +33,27 @@ void recursiveDFS(vector<bool>& visited, vector<vector<int>>& graph, int source)
     }
 }
 
+void bfs(queue<int>& q, vector<bool>& visited, vector<vector<int>>& graph, int source) {        //bfs   you can remove the queue and visited since it can be done without it or inside the funcion
+    visited[source] = true;
+    q.push(source);
+    while(q.size() > 0){
+        int node= q.front();
+        q.pop();
+        cout << node << " ";
+        for(int neg: graph[node]){
+            if(!visited[neg]) {
+                visited[neg] = true;
+                q.push(neg);
+            }
+        }
+            
+    }
+}
+
 
 int main() {
     stack<int> s;
+    queue<int> q;
     vector<vector<int>> graph = {
         {1, 2},
         {0, 3},
@@ -45,7 +63,7 @@ int main() {
     };
     vector<bool> visited(graph.size(), false);
     int source = 0; // Starting node for DFS
-    cout << "DFS Traversal: ";
-    dfs(s, visited, graph, source);
+    cout << "bFS Traversal: ";
+    bfs(q, visited, graph, source);
     return 0;
 }
